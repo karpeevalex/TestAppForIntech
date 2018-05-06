@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="SearchResultCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ge0-Ct-aaw">
+                        <rect key="frame" x="2" y="2" width="40" height="39.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="lbU-m8-HLD"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vj0-tE-q1Z">
+                        <rect key="frame" x="76" y="2" width="42" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="vHB-pK-hUO"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HpS-ZL-hAH">
+                        <rect key="frame" x="76" y="24" width="37.5" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="jdc-ej-dVe"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ge0-Ct-aaw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="3Y1-y9-2tG"/>
+                    <constraint firstAttribute="bottom" secondItem="ge0-Ct-aaw" secondAttribute="bottom" constant="2" id="7Wi-cI-LBh"/>
+                    <constraint firstItem="HpS-ZL-hAH" firstAttribute="leading" secondItem="ge0-Ct-aaw" secondAttribute="trailing" constant="34" id="BLp-ni-iYJ"/>
+                    <constraint firstItem="vj0-tE-q1Z" firstAttribute="leading" secondItem="ge0-Ct-aaw" secondAttribute="trailing" constant="34" id="MJ3-iA-Jux"/>
+                    <constraint firstItem="vj0-tE-q1Z" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="a0E-Mj-LeH"/>
+                    <constraint firstItem="ge0-Ct-aaw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="2" id="hcs-Cj-nKp"/>
+                    <constraint firstItem="HpS-ZL-hAH" firstAttribute="top" secondItem="vj0-tE-q1Z" secondAttribute="bottom" constant="2" id="uHS-5g-58h"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="artistNameLabel" destination="vj0-tE-q1Z" id="JXl-iA-kej"/>
+                <outlet property="songImageView" destination="ge0-Ct-aaw" id="89i-gB-ZDW"/>
+                <outlet property="songNameLabel" destination="HpS-ZL-hAH" id="hdr-Qt-etj"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>
