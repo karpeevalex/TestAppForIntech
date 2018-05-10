@@ -11,6 +11,6 @@
 @interface Searcher : NSObject
 
 + (Searcher *)sharedService;
-- (void)searchSongByString:(NSString *)searchString withCompletion:(void (^)(NSArray *results))completion;
+- (void)searchTrackByString:(NSString *)searchString withCompletion:(void (^)(NSArray *results))completion;
 
 @end

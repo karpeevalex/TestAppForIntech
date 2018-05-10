@@ -7,8 +7,9 @@
 //
 
 #import "SearchViewController.h"
-#import "SearchResultCell.h"
 #import "Searcher.h"
+#import "Track.h"
+#import "TrackViewController.h"
 
 @interface SearchViewController () <UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -16,6 +17,7 @@
 @property (nonatomic, strong) NSMutableArray *results;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UIActivityIndicatorView *searchActivityIndicator;
+@property (nonatomic, strong) NSTimer *timer;
 
 @end
 
@@ -24,7 +26,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.navigationItem.leftBarButtonItem setEnabled:YES];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageDownload:) name:@"imageDownload" object:nil];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -41,10 +49,6 @@
 
 - (void)setupTableView
 {
-    NSString *cellNibName = NSStringFromClass([SearchResultCell class]);
-    [self.tableView registerNib:[UINib nibWithNibName:cellNibName bundle:nil]
-         forCellReuseIdentifier:@"cellID"];
-    
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(self.tableView.bounds), 215)];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -68,10 +72,11 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    SearchResultCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellID" forIndexPath:indexPath];
-    NSDictionary *data = self.results[indexPath.row];
-    [cell updateWithSong:data];
-
+    Track *track = self.results[indexPath.row];
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
+    cell.textLabel.text = track.artistName;
+    cell.detailTextLabel.text = track.trackName;
+    cell.imageView.image = [UIImage imageWithData:track.imageData];
     return cell;
 }
 
@@ -82,7 +87,8 @@
 
 - (void)cellTapped:(NSInteger)row
 {
-    
+    [self.navigationController pushViewController:[[TrackViewController alloc] initWithTrack:self.results[row]]
+                                         animated:YES];
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -92,7 +98,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 86.0;
+    return 60.0;
 }
 
 #pragma mark - search text field delegate
@@ -105,13 +111,16 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [self showSearchResult];
+    [self showSearchResultIfNeeded];
     return YES;
 }
 
 - (void)textFieldDidChange:(UITextField *)textField
 {
-    [self showSearchResult];
+    if (textField.text.length >= 5)
+    {
+        [self showSearchResultIfNeeded];
+    }
 }
 
 #pragma mark - helpers
@@ -125,13 +134,17 @@
     }
 }
 
-- (void)showSearchResult
+- (void)showSearchResultIfNeeded
 {
     [self resetSearchResults];
-    
     [self.searchActivityIndicator startAnimating];
     
-    [[Searcher sharedService] searchSongByString:self.searchTextField.text withCompletion:^(NSArray *results){
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(showSearchResult) userInfo:nil repeats:NO];
+}
+
+- (void)showSearchResult
+{
+    [[Searcher sharedService] searchTrackByString:self.searchTextField.text withCompletion:^(NSArray *results){
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.searchActivityIndicator stopAnimating];
             self.results = results.mutableCopy;
@@ -142,15 +155,16 @@
 
 - (void)imageDownload:(NSNotification *)notif
 {
-    NSDictionary *song = [notif object];
-    int index = [song[@"index"] intValue];
-    if (self.results[index])
-    {
-        self.results[index] = song;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-        });
-    }
+    Track *track = [notif object];
+    NSInteger index = track.index;
+    __weak SearchViewController *weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([weakSelf.searchTextField.text isEqualToString:track.keyword])
+        {
+            NSArray *indexPaths = @[[NSIndexPath indexPathForRow:index inSection:0]];
+            [weakSelf.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+        }
+    });
 }
 
 @end

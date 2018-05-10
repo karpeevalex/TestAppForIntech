@@ -7,6 +7,7 @@
 //
 
 #import "Searcher.h"
+#import "Track.h"
 
 static Searcher *_instance;
 
@@ -24,7 +25,7 @@ static Searcher *_instance;
     return _instance;
 }
 
-- (void)searchSongByString:(NSString *)searchString withCompletion:(void (^)(NSArray *))completion
+- (void)searchTrackByString:(NSString *)searchString withCompletion:(void (^)(NSArray *))completion
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/search?term=%@", searchString]];
@@ -47,15 +48,16 @@ static Searcher *_instance;
                                                             NSArray *mainObject = [object valueForKey:@"results"];
                                                             
                                                             NSInteger i = 0;
-                                                            for (NSDictionary *dirtySong in mainObject)
+                                                            for (NSDictionary *dirtyTrack in mainObject)
                                                             {
-                                                                NSMutableDictionary *song = [NSMutableDictionary dictionary];
-                                                                song[@"index"] = [NSString stringWithFormat:@"%ld", i];
-                                                                song[@"artistName"] = dirtySong[@"artistName"];
-                                                                song[@"imageUrl"] = dirtySong[@"artworkUrl100"];
-                                                                song[@"songName"] = dirtySong[@"trackName"];
-                                                                [self downloadImageForSong:song];
-                                                                [results addObject:song];
+                                                                NSMutableDictionary *track = [NSMutableDictionary dictionary];
+                                                                track[@"keyword"] = searchString;
+                                                                track[@"index"] = [NSString stringWithFormat:@"%ld", i];
+                                                                track[@"artistName"] = dirtyTrack[@"artistName"];
+                                                                track[@"imageUrl"] = dirtyTrack[@"artworkUrl100"];
+                                                                track[@"trackName"] = dirtyTrack[@"trackName"];
+                                                                Track *res = [[Track alloc] initWithDict:track];
+                                                                [results addObject:res];
                                                                 i++;
                                                             }
                                                         }
@@ -67,17 +69,6 @@ static Searcher *_instance;
                                                     }
                                                 }];
         [task resume];
-    });
-}
-
-- (void)downloadImageForSong:(NSDictionary *)song
-{
-    NSMutableDictionary *songCopy = [song mutableCopy];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        NSURL *url = [NSURL URLWithString:songCopy[@"imageUrl"]];
-        NSData *imageData = [NSData dataWithContentsOfURL:url];
-        songCopy[@"imageData"] = imageData;
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"imageDownload" object:[songCopy copy]];
     });
 }
 

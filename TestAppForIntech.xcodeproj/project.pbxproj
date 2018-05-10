@@ -12,10 +12,11 @@
 		87382D07209DD81B00507DED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 87382D06209DD81B00507DED /* main.m */; };
 		87382D10209DD9E400507DED /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87382D0E209DD9E400507DED /* SearchViewController.m */; };
 		87382D11209DD9E400507DED /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87382D0F209DD9E400507DED /* SearchViewController.xib */; };
-		87382D15209DDAFF00507DED /* SearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87382D13209DDAFF00507DED /* SearchResultCell.m */; };
-		87382D16209DDAFF00507DED /* SearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87382D14209DDAFF00507DED /* SearchResultCell.xib */; };
 		87382D19209DE2B200507DED /* Searcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 87382D18209DE2B200507DED /* Searcher.m */; };
 		87382D1B209F4C4D00507DED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87382D1A209F4C4D00507DED /* Main.storyboard */; };
+		87382D1F20A03A6E00507DED /* TrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87382D1D20A03A6E00507DED /* TrackViewController.m */; };
+		87382D2020A03A6E00507DED /* TrackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87382D1E20A03A6E00507DED /* TrackViewController.xib */; };
+		87382D2320A040D800507DED /* Track.m in Sources */ = {isa = PBXBuildFile; fileRef = 87382D2220A040D800507DED /* Track.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,12 +29,14 @@
 		87382D0D209DD9E400507DED /* SearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		87382D0E209DD9E400507DED /* SearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		87382D0F209DD9E400507DED /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
-		87382D12209DDAFF00507DED /* SearchResultCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchResultCell.h; sourceTree = "<group>"; };
-		87382D13209DDAFF00507DED /* SearchResultCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchResultCell.m; sourceTree = "<group>"; };
-		87382D14209DDAFF00507DED /* SearchResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultCell.xib; sourceTree = "<group>"; };
 		87382D17209DE2B200507DED /* Searcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Searcher.h; sourceTree = "<group>"; };
 		87382D18209DE2B200507DED /* Searcher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Searcher.m; sourceTree = "<group>"; };
 		87382D1A209F4C4D00507DED /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		87382D1C20A03A6E00507DED /* TrackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrackViewController.h; sourceTree = "<group>"; };
+		87382D1D20A03A6E00507DED /* TrackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrackViewController.m; sourceTree = "<group>"; };
+		87382D1E20A03A6E00507DED /* TrackViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackViewController.xib; sourceTree = "<group>"; };
+		87382D2120A040D800507DED /* Track.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Track.h; sourceTree = "<group>"; };
+		87382D2220A040D800507DED /* Track.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Track.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,14 +71,16 @@
 			children = (
 				87382CF7209DD81B00507DED /* AppDelegate.h */,
 				87382CF8209DD81B00507DED /* AppDelegate.m */,
+				87382D2120A040D800507DED /* Track.h */,
+				87382D2220A040D800507DED /* Track.m */,
 				87382D0D209DD9E400507DED /* SearchViewController.h */,
 				87382D0E209DD9E400507DED /* SearchViewController.m */,
 				87382D0F209DD9E400507DED /* SearchViewController.xib */,
-				87382D12209DDAFF00507DED /* SearchResultCell.h */,
-				87382D13209DDAFF00507DED /* SearchResultCell.m */,
-				87382D14209DDAFF00507DED /* SearchResultCell.xib */,
 				87382D17209DE2B200507DED /* Searcher.h */,
 				87382D18209DE2B200507DED /* Searcher.m */,
+				87382D1C20A03A6E00507DED /* TrackViewController.h */,
+				87382D1D20A03A6E00507DED /* TrackViewController.m */,
+				87382D1E20A03A6E00507DED /* TrackViewController.xib */,
 				87382D00209DD81B00507DED /* Assets.xcassets */,
 				87382D1A209F4C4D00507DED /* Main.storyboard */,
 				87382D05209DD81B00507DED /* Info.plist */,
@@ -142,7 +147,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87382D16209DDAFF00507DED /* SearchResultCell.xib in Resources */,
+				87382D2020A03A6E00507DED /* TrackViewController.xib in Resources */,
 				87382D01209DD81B00507DED /* Assets.xcassets in Resources */,
 				87382D11209DD9E400507DED /* SearchViewController.xib in Resources */,
 				87382D1B209F4C4D00507DED /* Main.storyboard in Resources */,
@@ -156,9 +161,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87382D2320A040D800507DED /* Track.m in Sources */,
 				87382D07209DD81B00507DED /* main.m in Sources */,
 				87382D19209DE2B200507DED /* Searcher.m in Sources */,
-				87382D15209DDAFF00507DED /* SearchResultCell.m in Sources */,
+				87382D1F20A03A6E00507DED /* TrackViewController.m in Sources */,
 				87382D10209DD9E400507DED /* SearchViewController.m in Sources */,
 				87382CF9209DD81B00507DED /* AppDelegate.m in Sources */,
 			);
