@@ -157,12 +157,11 @@
 {
     Track *track = [notif object];
     NSInteger index = track.index;
-    __weak SearchViewController *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        if ([weakSelf.searchTextField.text isEqualToString:track.keyword])
+        if ([self.searchTextField.text isEqualToString:track.keyword])
         {
             NSArray *indexPaths = @[[NSIndexPath indexPathForRow:index inSection:0]];
-            [weakSelf.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+            [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
         }
     });
 }
